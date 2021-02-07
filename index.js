@@ -1,5 +1,5 @@
 
-const mealList = document.getElementById('mealDisplay');
+const mealDisplay = document.getElementById('mealDisplay');
 const mealDetailsContent = document.querySelector('.mealDetailsContent');
 
 // deatials button event listeners
@@ -19,29 +19,29 @@ searchBtn.addEventListener('click', function () {
 			if (data.meals) {
 				data.meals.forEach(meal => {
 					renderHtmlTag += `
-						 <div id="modalBox" class="meal-item" data-id = "${meal.idMeal}">
-								 <div class = "meal-img">
-										 <img src = "${meal.strMealThumb}" alt = "food">
-								 </div>
-								 <div class = "meal-name">
-										 <h3>${meal.strMeal}</h3>
-										 <a href = "#" class = "detailsBtn">Get Details</a>
-								 </div>
-						 </div>
-						 `;
+						<div id="nothing" class="meal-itemBox" data-id = "${meal.idMeal}">
+							<div class = "meal-img">
+								<img src = "${meal.strMealThumb}" alt = "food">
+							</div>
+							<div class = "meal-name">
+								<h3>${meal.strMeal}</h3>
+								<a href = "#" class = "detailsBtn">Get Details</a>
+							</div>
+						</div>
+						`;
 				});
-				mealList.classList.remove('findFail');
+				mealDisplay.classList.remove('findFail');
 			} else {
 				renderHtmlTag = "Sorry, Please Enter a Valid Recipe Name!";
-				mealList.classList.add('findFail');
+				mealDisplay.classList.add('findFail');
 			}
-			mealList.innerHTML = renderHtmlTag;
+			mealDisplay.innerHTML = renderHtmlTag;
 		});
 });
 
 
 // get recipe of the meal list
-mealList.addEventListener('click', function (e) {
+mealDisplay.addEventListener('click', function (e) {
 	e.preventDefault();
 	if (e.target.classList.contains('detailsBtn')) {
 		let mealItem = e.target.parentElement.parentElement;
@@ -62,23 +62,23 @@ function modalMealRecipe(meal) {
 		 </div>
 		 <p class = "recipe-category">${meal.strCategory}</p>
 		 <div class = "recipe-instruct">
-				 <h3>INGREDIENTS</h3>
-				 <li ><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient1}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient2}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient3}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient4}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient5}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient6}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient7}</li>
-				 <li><i class="fa fa-check-square" aria-hidden="true"></i>
-					 ${meal.strIngredient8}</li>
+				<h3>INGREDIENTS</h3>
+				<li ><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient1}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient2}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient3}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient4}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient5}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient6}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient7}</li>
+				<li><i class="fa fa-check-square" aria-hidden="true"></i>
+					${meal.strIngredient8}</li>
 		 </div>
  `;
 	mealDetailsContent.innerHTML = renderHtmlTag;

@@ -91,7 +91,7 @@ body {
     margin: 2.4rem 0;
 }
 
-.meal-item {
+.meal-itemBox{
     border-radius: 1rem;
     -webkit-border-radius: 1rem;
     -moz-border-radius: 1rem;
@@ -273,7 +273,7 @@ body {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
     }
-    .meal-item {
+    .meal-itemBox {
         margin: 0;
     }
     .meal-details {
