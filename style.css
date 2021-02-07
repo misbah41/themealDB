@@ -249,7 +249,7 @@ body {
 
 /*  */
 
-.notFound {
+.findFail {
     grid-template-columns: 1fr!important;
     color: rgb(255, 8, 0);
     font-size: 20px;

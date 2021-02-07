@@ -30,10 +30,10 @@ searchBtn.addEventListener('click', function () {
 						 </div>
 						 `;
 				});
-				mealList.classList.remove('notFound');
+				mealList.classList.remove('findFail');
 			} else {
 				renderHtmlTag = "Sorry, Please Enter a Valid Recipe Name!";
-				mealList.classList.add('notFound');
+				mealList.classList.add('findFail');
 			}
 			mealList.innerHTML = renderHtmlTag;
 		});
