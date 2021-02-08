@@ -1,7 +1,4 @@
 
-
-
-
 const mealDisplay = document.getElementById('mealDisplay');
 const mealDetailsContent = document.querySelector('.mealDetailsContent');
 
@@ -39,7 +36,9 @@ searchBtn.addEventListener('click', function () {
 					mealDisplay.classList.add('findFail');
 				}
 				mealDisplay.innerHTML = renderHtmlTag;
-			});
+			})
+			.catch (()=> alert('API fail Please wait a few minutes'))
+
 	} else {
 		alert('Please Enter Any Recipe Name')
 	}
@@ -66,25 +65,21 @@ function modalMealRecipe(meal) {
 		 <p class = "recipe-category">${meal.strCategory}</p>
 		 <div class = "recipe-instruct">
 				<h3>INGREDIENTS</h3>
-				<li ><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient1}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient2}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient3}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient4}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient5}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient6}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient7}</li>
-				<li><i class="fa fa-check-square" aria-hidden="true"></i>
-					${meal.strIngredient8}</li>
+				<ul id="ingredientList">
+
+				</ul>
 		 </div>
  `;
 	mealDetailsContent.innerHTML = renderHtmlTag;
+	//for loop for all ingredients 
+	const ingredientList = document.getElementById('ingredientList');
+	for (let i = 1; i <= 20; i++) {
+		if (meal['strIngredient' + i]) {
+			const ingredients = document.createElement('li');
+			ingredients.innerText = `${meal['strMeasure' + i]} ${meal['strIngredient' + i]}`;
+			ingredientList.appendChild(ingredients);
+		}
+	}
 	mealDetailsContent.parentElement.classList.add('showRecipe');
 };
 
