@@ -2,26 +2,27 @@
 
 
 
-    const mealDisplay = document.getElementById('mealDisplay');
-    const mealDetailsContent = document.querySelector('.mealDetailsContent');
+const mealDisplay = document.getElementById('mealDisplay');
+const mealDetailsContent = document.querySelector('.mealDetailsContent');
 
-    // deatials button event listeners
-    const detailsCloseBtn = document.getElementById('detailsCloseBtn');
-    detailsCloseBtn.addEventListener('click', () => {
-      mealDetailsContent.parentElement.classList.remove('showRecipe');
-    });
+// deatials button event listeners
+const detailsCloseBtn = document.getElementById('detailsCloseBtn');
+detailsCloseBtn.addEventListener('click', () => {
+	mealDetailsContent.parentElement.classList.remove('showRecipe');
+});
 
-    // get meal list that matches with the ingredients list
-    const searchBtn = document.getElementById('search-btn');
-    searchBtn.addEventListener('click', function () {
-      let searchInput = document.getElementById('searchInput').value;
-      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`)
-        .then(response => response.json())
-        .then(data => {
-          let renderHtmlTag = "";
-          if (data.meals) {
-            data.meals.forEach(meal => {
-              renderHtmlTag += `
+// get meal list that matches with the ingredients list
+const searchBtn = document.getElementById('search-btn');
+searchBtn.addEventListener('click', function () {
+	let searchInput = document.getElementById('searchInput').value;
+	if (searchInput !== "") {
+		fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`)
+			.then(response => response.json())
+			.then(data => {
+				let renderHtmlTag = "";
+				if (data.meals) {
+					data.meals.forEach(meal => {
+						renderHtmlTag += `
 						<div onclick="getDetails(${meal.idMeal})"  class="meal-itemBox" data-id = "${meal.idMeal}">
 							<div class = "meal-img">
 								<img src = "${meal.strMealThumb}" alt = "food">
@@ -31,30 +32,33 @@
 							</div>
 						</div>
 						`;
-            });
-            mealDisplay.classList.remove('findFail');
-          } else {
-            renderHtmlTag = "Sorry, Please Enter a Valid Recipe Name!";
-            mealDisplay.classList.add('findFail');
-          }
-          mealDisplay.innerHTML = renderHtmlTag;
-        });
-    });
+					});
+					mealDisplay.classList.remove('findFail');
+				} else {
+					renderHtmlTag = "Sorry, Please Enter a Valid Recipe Name!";
+					mealDisplay.classList.add('findFail');
+				}
+				mealDisplay.innerHTML = renderHtmlTag;
+			});
+	} else {
+		alert('Please Enter Any Recipe Name')
+	}
+});
 
 
 
-    // Function For Get Details Of Meals
-    const getDetails = mealId => {
-      fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
-        .then(response => response.json())
-        .then(data => modalMealRecipe(data.meals));
-        
-    }
+// Function For Get Details Of Meals
+const getDetails = mealId => {
+	fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
+		.then(response => response.json())
+		.then(data => modalMealRecipe(data.meals));
 
-    // create a modal function
-    function modalMealRecipe(meal) {
-      meal = meal[0];
-      let renderHtmlTag = `
+}
+
+// create a modal function
+function modalMealRecipe(meal) {
+	meal = meal[0];
+	let renderHtmlTag = `
 		 <h2 class = "recipe-title">${meal.strMeal}</h2>
 		 <div class = "recipe-meal-img">
 				 <img src = "${meal.strMealThumb}" alt = "">
@@ -80,8 +84,8 @@
 					${meal.strIngredient8}</li>
 		 </div>
  `;
-      mealDetailsContent.innerHTML = renderHtmlTag;
-      mealDetailsContent.parentElement.classList.add('showRecipe');
-    };
+	mealDetailsContent.innerHTML = renderHtmlTag;
+	mealDetailsContent.parentElement.classList.add('showRecipe');
+};
 
 
